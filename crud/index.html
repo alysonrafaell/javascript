@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="icons8-samurai-jack-96.png" type="image/x-icon">
+<link rel="stylesheet" href="style.css">
+
+    <title>Novo usuario</title>
+</head>
+<body>
+
+    <div class="comeco">
+      <section class="header">
+            
+        <h2>CADASTRO</h2>
+       
+    </section>
+        <form id="form" class="form">
+        <div class="meio">
+                <label for="username">Nome do usuário</label>
+                <input type="text" id="username" placeholder="Digite o nome de usuário" ">
+
+                <a class=".error">Erro</a>
+            </div>
+            <div class="meio ">
+                <label for="ddn">Data De Nascimento</label>
+                <input type="date" id="ddn" placeholder="Digite a data de nascimento">
+                
+                <a>Erro</a>
+                
+            </div>
+            <div class="meio">
+                <label for="cpf">CPF</label>
+                <input type="text" id="cpf" placeholder="Digite o cpf" maxlength="11" >
+                
+                <a>Erro</a>
+            </div>
+            <div class="meio">
+                <h2>ENDEREÇO</h2>
+                <label for="cep">CEP</label>
+                <input type="text" nome="cep"  id="cep" placeholder="Digite seu CEP" maxlength="8">
+
+                <a>Error</a>
+                <br>
+                </div>
+                <div class="meio">
+                <label for="rua">Rua</label>
+                <input type="text" nome="rua"  id="rua" placeholder="Digite nome da rua">
+
+                <a>Erro</a>
+
+                <br>
+                </div>
+                <div class="meio">
+                <label for="num">Nº</label>
+                <input type="text" nome="n"  id="num" placeholder="Digite número da casa">
+
+                <a>Erro</a>
+
+                <br>
+                </div>
+                <div class="meio">
+                <label for="bairro">Bairro</label>
+                <input type="text" nome="bairro"  id="bairro" placeholder="Digite nome do bairro" >
+
+                <a>Erro</a>
+
+                <br>
+                </div>
+                <div class="meio">
+                <label for="cidade">Cidade</label>
+                <input type="text" nome="cidade"  id="cidade" placeholder="Digite nome da cidade" >
+                <a>Erro</a>
+
+                <br>
+                </div>
+                <div class="meio">
+                <label for="ddd">DDD</label>
+                <input type="text" nome="ddd"  id="ddd" placeholder="Digite número do ddd" maxlength="3">
+
+                <a >Erro</a>
+
+                <br>
+                </div>
+
+                <div class="meio">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" nome="telefone"  id="telefone" placeholder="Digite número de telefone" maxlength="15">
+                    <a>Erro</a>
+                    <br>
+                </div>
+                <div class="meio">
+                    <label for="email">E-mail</label>
+                    <input type="email" nome="email"  id="email" placeholder="Digite seu email">
+                    <a>Erro</a>
+                    <br>
+                </div>
+            
+            
+            
+            <button type="submit" id="sim" > CADASTRAR</button>      
+            
+         
+            </form>
+
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family:'Rubik', sans-serif;
+}
+body{
+    background-color:  #082f52;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.comeco{
+    background-color: white;
+    border-radius: 5px ;
+    padding: 20px;
+    
+    margin: 10px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow:  0 2px 12px rgba(0, 0, 0, 0.507);
+   
+}
+.header{
+    background-color:   #2d3d2b;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    border-radius: 50px;
+   
+}
+.form{
+    padding: 12px;
+    
+}
+.meio{
+    margin-bottom: 8px;
+    padding-bottom: 10px;
+    padding-top:20px ;
+    margin-top: -14px;
+    position: relative;
+}
+.meio label{
+    display: inline-block;
+    margin-bottom: 4px;
+   
+}
+.meio input{
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    padding: 8px;
+    border: 2px solid #2d3d2b;
+}
+ input:focus{
+    outline: #2d3d2b;
+
+}
+.meio a{
+  
+    bottom: -10px;
+    left: 0;
+   visibility: hidden;
+
+}
+.meio h2{
+    background-color: #2d3d2b;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    border-radius: 50px;
+    margin-top:30px;
+    margin-bottom: 20px;
+}
+.meio.erro input{
+    border-color: #ff3b25;
+}
+.meio.erro a{
+    color: red;
+    visibility: visible;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-color: rgba(7, 7, 185, 0.856);
+    width: 180px;
+    padding: 10px;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-bottom: -10px;
+    border: 0;
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    
+}
+
+button:hover{
+    
+transition: .5s;
+background-color: rgba(7, 7, 185, 0.712);
+}
