@@ -66,7 +66,7 @@ brlInput.addEventListener("keyup", ()=>{
     console.log("Apertou no campo BRL.")
 })*/
 
-let dolar = 5.62
+let dolar = 6.07
 
 
 let usdInput = document.querySelector("#usd")
@@ -135,7 +135,7 @@ if(type == "usd-to-brl"){
     let fixedValue = fixValue(usdInput.value)
     //converter o valor
      let result = fixedValue * dolar 
-      result = result.toFixed(2); //pegar os decimais desse numero e transformar em dois
+      result = result.toFixed(2); //pegar os decimais desse numero e transforma em dois
     //mostra no campo de real 
     brlInput.value = formatCurrency(result)
 }
