@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Bloco de notas Electron</title>
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>📝 Bloco De Notas</h1>
+    <div class="buttons">
+      <button id="btn-open">ABRIR</button>
+      <button id="btn-save">SALVAR</button>
+      <button id="btn-save-as">SALVAR COMO..</button>
+    </div>
+  </header>
+
+  <main>
+    <textarea id="editor" placeholder="Digite seu texto aqui..."></textarea>
+  </main>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+header {
+  background-color: #ddc019;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 24px;
+}
+
+header .buttons button {
+  margin-left: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: white;
+  color: #0c0e08;
+  transition: background-color 0.2s;
+}
+
+header .buttons button:hover {
+  background-color: #ffffffe3;
+}
+
+
+main {
+  flex: 1; 
+  padding: 20px;
+}
+
+
+#editor {
+  width: 100%;
+  height: 100%;
+  resize: none;    
+  font-size: 18px;     
+  line-height: 1.5;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  background-color: #fff;
+  color: #333;
+}
+#btn-open, #btn-save,#btn-save-as{
+    font-weight: bolder;
+    font-family:  'Gill Sans MT';
+}
