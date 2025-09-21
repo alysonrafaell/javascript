@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Configurações - App De Clima</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2d3436;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2d3436;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dfe6e9;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        input:focus, select:focus {
+            border-color: #74b9ff;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #save-btn {
+            background: #00b894;
+            color: white;
+        }
+        #save-btn:hover {
+            background: #00a382;
+        }
+        #cancel-btn {
+            background: #dfe6e9;
+            color: #2d3436;
+        }
+        #cancel-btn:hover {
+            background: #b2bec3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>⚙️ Configurações</h2>
+        
+        <div class="form-group">
+            <label for="config-city">Cidade Padrão:</label>
+            <input type="text" id="config-city" placeholder="Ex: São Paulo">
+        </div>
+        
+        <div class="form-group">
+            <label for="config-unit">Unidade de Temperatura:</label>
+            <select id="config-unit">
+                <option value="celsius">Celsius (°C)</option>
+                <option value="fahrenheit">Fahrenheit (°F)</option>
+            </select>
+        </div>
+        
+        <div class="buttons">
+            <button id="cancel-btn">Cancelar</button>
+            <button id="save-btn">Salvar</button>
+        </div>
+    </div>
+
+    <script src="../src/preload.js"></script>
+    <script>
+        // Script de configurações
+        document.addEventListener('DOMContentLoaded', async () => {
+            const saveBtn = document.getElementById('save-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const cityInput = document.getElementById('config-city');
+            const unitSelect = document.getElementById('config-unit');
+            
+            console.log('Janela de configurações carregada');
+            
+            // Carregar configurações atuais
+            try {
+                const settings = await window.weatherAPI.getSettings();
+                console.log('Configurações carregadas:', settings);
+                
+                if (settings) {
+                    cityInput.value = settings.city || '';
+                    unitSelect.value = settings.unit || 'celsius';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar configurações:', error);
+                alert('Erro ao carregar configurações. Tente novamente.');
+            }
+            
+            // Salvar configurações
+            saveBtn.addEventListener('click', async () => {
+                const newSettings = {
+                    city: cityInput.value.trim(),
+                    unit: unitSelect.value
+                };
+                
+                if (!newSettings.city) {
+                    alert('Por favor, digite o nome de uma cidade');
+                    return;
+                }
+                
+                try {
+                    console.log('Salvando configurações:', newSettings);
+                    window.weatherAPI.saveSettings(newSettings);
+                    
+                    // Feedback visual
+                    saveBtn.textContent = '✓ Salvo!';
+                    saveBtn.style.background = '#00b894';
+                    setTimeout(() => {
+                        window.close();
+                    }, 1000);
+                    
+                } catch (error) {
+                    console.error('Erro ao salvar configurações:', error);
+                    alert('Erro ao salvar configurações. Tente novamente.');
+                }
+            });
+            
+            // Cancelar
+            cancelBtn.addEventListener('click', () => {
+                window.close();
+            });
+            
+            // Fechar com ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    window.close();
+                }
+                if (e.key === 'Enter') {
+                    saveBtn.click();
+                }
+            });
+            
+            // Focar no campo de cidade ao abrir
+            cityInput.focus();
+        });
+    </script>
+</body>
+</html>

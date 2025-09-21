@@ -1,0 +1,42 @@
+{
+  "name": "projeto-desktop",
+  "version": "1.0.0",
+  "description": "Aplicativo de clima para desktop com Electron",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win"
+  },
+  "build": {
+    "appId": "com.example.weatherapp",
+    "productName": "Weather App",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "windows/**/*",
+      "assets/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icons/icon.ico"
+    }
+  },
+  "keywords": [
+    "electron",
+    "weather",
+    "app"
+  ],
+  "author": "Alyson Rafael",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "dependencies": {
+    "axios": "^1.5.0"
+  }
+}

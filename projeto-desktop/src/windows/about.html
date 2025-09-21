@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre - App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 100%;
+    }
+    h1 {
+      margin-bottom: 15px;
+      color: #4CAF50;
+    }
+    p {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .version {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sobre o App</h1>
+    <p>Este é um aplicativo de clima desenvolvido com Electron que permite consultar as condições meteorológicas de qualquer cidade do mundo.</p>
+    <p>Desenvolvido como parte de um projeto acadêmico para demonstrar as capacidades do Electron no desenvolvimento de aplicações desktop.</p>
+    <p class="version">Versão: 1.0.0</p>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const closeBtn = document.getElementById('close-btn');
+  
+  closeBtn.addEventListener('click', () => {
+    window.close();
+  });
+  
+  // Fechar com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      window.close();
+    }
+  });
+});
+  </script>
+</body>
+</html>

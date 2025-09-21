@@ -1,0 +1,66 @@
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"> <!--CARACTERES PORTUGUES-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--CONTROLE DE AREA VISIVEL NAS TELAS-->
+        <meta http-equiv="Content-Security-Policy" 
+    content="default-src 'self'; 
+            script-src 'self'; 
+            style-src 'self' 'unsafe-inline' https:; 
+            font-src 'self' https: data:; 
+            img-src 'self' https: data:;">
+    <!--ISSO SERVE PARA POLITICAS DE SEGURANÇA PARA SUA APLICAÇAO, CONTROLANDO ONDE PODEM SER CARREGADOS-->
+
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+        <title>MEU CLIMA ⛅</title>
+    </head>
+    <body>
+        <div class="container">
+
+            <!-- BARRA DE BOTÕES CONFIG E ABOUT -->
+            
+            <div class="form">
+                <h3 id="title">PREVISÃO DO TEMPO</h3>
+                <div class="form-input-container">
+                    <input type="text" placeholder="Digite o nome da cidade..." id="city-input">
+
+                    <button id="busca">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <div class="top-buttons">
+                <button id="config-btn"><i class="fa-solid fa-gear"></i></button>
+                <button id="about-btn"><i class="fa-solid fa-circle-info"></i></button>
+            </div>
+            </div> 
+            <div id="weather-data">
+                <h2>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span id="city">p</span>
+                    <img src="https://countryflagsapi.com/png/br" alt="Bandeira do País" id="country"
+                    style="display: none;">
+                </h2>
+                <p id="temp"><span></span></p>
+                <div id="descr-pai">
+                    <p id="descr-filho">n</p>
+                    <img src="http://openweathermap.org/img/wn/01d.png" alt="Condição do tempo" id="img-cidade">
+                </div>
+                <div id="detalhes">
+                    <p id="umidade">
+                        <i class="fa-solid fa-droplet"></i>
+                        <span>%</span>
+                    </p>
+                    <p id="vento">
+                        <i class="fa-solid fa-wind"></i>
+                        <span>k</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script src="renderer.js" defer></script> <!--DEFER CARREGA DPS DO HTML-->
+    </body>
+
+    </html>
