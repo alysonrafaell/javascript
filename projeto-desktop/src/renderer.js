@@ -20,7 +20,7 @@ async function getWeather(city) {
 
   isSearching = true;
   searchBtn.disabled = true;
-  searchBtn.textContent = "Buscando...";
+  searchBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
 
   try {
     const data = await window.weatherAPI.getWeather(city);
@@ -46,14 +46,11 @@ async function getWeather(city) {
     countryImg.src = `https://flagsapi.com/${countryCode}/shiny/64.png`;
     countryImg.alt = `Bandeira do ${countryCode}`;
     countryImg.style.display = "inline-block";
-    countryImg.style.width = "30px";
-    countryImg.style.height = "20px";
-    countryImg.style.marginLeft = "10px";
 
     humidityElement.textContent = `${data.main.humidity}%`;
     windElement.textContent = `${data.wind.speed} km/h`;
 
-    // Notificação - Corrigida para mostrar nome correto
+    // Notificação
     if (window.weatherAPI && window.weatherAPI.showNotification) {
       window.weatherAPI.showNotification(
         `Clima em ${data.name}`,
@@ -63,17 +60,17 @@ async function getWeather(city) {
 
   } catch (error) {
     console.error("Erro ao buscar dados:", error);
-    // Removido o showError duplicado que causava mensagem de "erro inesperado"
+    showError("Erro ao buscar dados do clima");
   } finally {
     isSearching = false;
     searchBtn.disabled = false;
-    searchBtn.textContent = "Buscar";
+    searchBtn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>';
   }
 }
 
-// Mostrar mensagem de erro
+// Mostrar mensagem de erro/informação
 function showError(message) {
-  // Remover erro anterior se existir
+  // Remover mensagem anterior se existir
   const existingError = document.querySelector('.error-message');
   if (existingError) {
     existingError.remove();
@@ -84,16 +81,19 @@ function showError(message) {
   errorDiv.style.position = "fixed";
   errorDiv.style.top = "20px";
   errorDiv.style.right = "20px";
-  errorDiv.style.background = "#ff4444";
+  errorDiv.style.background = "#4CAF50";
   errorDiv.style.color = "white";
-  errorDiv.style.padding = "10px 15px";
-  errorDiv.style.borderRadius = "5px";
+  errorDiv.style.padding = "12px 16px";
+  errorDiv.style.borderRadius = "6px";
   errorDiv.style.zIndex = "1000";
-  errorDiv.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
+  errorDiv.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
+  errorDiv.style.fontSize = "14px";
+  errorDiv.style.fontWeight = "500";
   errorDiv.textContent = message;
 
   document.body.appendChild(errorDiv);
 
+  // Remover após 3 segundos (ajustável)
   setTimeout(() => {
     if (errorDiv.parentNode) {
       errorDiv.parentNode.removeChild(errorDiv);
@@ -101,17 +101,18 @@ function showError(message) {
   }, 3000);
 }
 
-// Criar botão de manter tela ativa
+// Criar botão de manter tela ativa (NO CANTO INFERIOR ESQUERDO)
 function createPowerSaveButton() {
-  // Verificar se o botão já existe
   if (document.getElementById('power-save-btn')) return;
   
   const powerSaveBtn = document.createElement('button');
   powerSaveBtn.id = 'power-save-btn';
   powerSaveBtn.innerHTML = '💤 Manter tela ativa';
+  
+  // POSICIONADO NO CANTO INFERIOR ESQUERDO
   powerSaveBtn.style.position = 'fixed';
   powerSaveBtn.style.bottom = '15px';
-  powerSaveBtn.style.right = '15px';
+  powerSaveBtn.style.left = '15px'; // ← MUDADO PARA ESQUERDA
   powerSaveBtn.style.padding = '8px 12px';
   powerSaveBtn.style.background = '#f0f0f0';
   powerSaveBtn.style.border = '1px solid #ccc';
@@ -133,6 +134,11 @@ function createPowerSaveButton() {
   });
   
   document.body.appendChild(powerSaveBtn);
+}
+
+// Mostrar mensagem de atalhos
+function showShortcutsMessage() {
+  showError("Utilize os atalhos: Ctrl+Q (sair), Ctrl+←|→ (mover janela), Ctrl+N (busca), ESC (fechar janelas)");
 }
 
 // Event listeners
@@ -230,10 +236,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     // Criar botão de manter tela ativa
     createPowerSaveButton();
     
-    // Mostrar mensagem de boas-vindas
+    // MOSTRAR MENSAGEM DE ATALHOS - AGORA COM EMOJI E MENSAGEM COMPLETA
     setTimeout(() => {
-      showError("Atalhos do App Ctrl+<-|->, e Ctrl+Q para sair.");
+      showShortcutsMessage();
     }, 1500);
+    
     document.body.classList.add('loaded')
   }, 100);
 });

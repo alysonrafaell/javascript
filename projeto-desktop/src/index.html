@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--CONTROLE DE AREA VISIVEL NAS TELAS-->
         <meta http-equiv="Content-Security-Policy" 
     content="default-src 'self'; 
-            script-src 'self'; 
+            script-src 'self' 'unsafe-eval'; 
             style-src 'self' 'unsafe-inline' https:; 
             font-src 'self' https: data:; 
             img-src 'self' https: data:;">
@@ -13,7 +13,7 @@
 
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+        
 
         <title>MEU CLIMA ⛅</title>
     </head>
@@ -45,9 +45,10 @@
                 </h2>
                 <p id="temp"><span></span></p>
                 <div id="descr-pai">
-                    <p id="descr-filho">n</p>
+                    
                     <img src="http://openweathermap.org/img/wn/01d.png" alt="Condição do tempo" id="img-cidade">
                 </div>
+                <p id="descr-filho">n</p>
                 <div id="detalhes">
                     <p id="umidade">
                         <i class="fa-solid fa-droplet"></i>

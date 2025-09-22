@@ -17,6 +17,7 @@
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
         }
         h2 {
             color: #2d3436;
@@ -71,11 +72,79 @@
         #cancel-btn:hover {
             background: #b2bec3;
         }
+        
+        /* ESTILOS DO TOOLTIP DE ATALHOS */
+        .atalhos-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #666;
+            cursor: help;
+            font-size: 14px;
+            background: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: #2d3436;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            width: 250px;
+            right: 0;
+            top: 35px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            line-height: 1.4;
+        }
+        
+        .atalhos-info:hover .tooltip {
+            display: block;
+        }
+        
+        .tooltip strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #74b9ff;
+        }
+        
+        .tooltip ul {
+            margin: 0;
+            padding-left: 15px;
+        }
+        
+        .tooltip li {
+            margin: 5px 0;
+        }
+        
+        .tooltip li:hover {
+            color: #a29bfe;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>⚙️ Configurações</h2>
+        
+        <!-- TOOLTIP DE ATALHOS -->
+        <div class="atalhos-info">
+            🔤 Atalhos
+            <div class="tooltip">
+                <strong>Atalhos do Aplicativo</strong>
+                <ul>
+                    <li>Ctrl + N: Nova busca</li>
+                    <li>Ctrl + ←: Mover janela para esquerda</li>
+                    <li>Ctrl + →: Mover janela para direita</li>
+                    <li>Ctrl + Q: Sair do aplicativo</li>
+                    <li>ESC: Fechar janela atual</li>
+                </ul>
+            </div>
+        </div>
         
         <div class="form-group">
             <label for="config-city">Cidade Padrão:</label>
@@ -96,7 +165,6 @@
         </div>
     </div>
 
-    <script src="../src/preload.js"></script>
     <script>
         // Script de configurações
         document.addEventListener('DOMContentLoaded', async () => {
@@ -118,7 +186,6 @@
                 }
             } catch (error) {
                 console.error('Erro ao carregar configurações:', error);
-                alert('Erro ao carregar configurações. Tente novamente.');
             }
             
             // Salvar configurações

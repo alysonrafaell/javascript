@@ -1,78 +1,43 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
-// Expor APIs seguras para o renderer
+// API segura para o renderer process
 contextBridge.exposeInMainWorld("weatherAPI", {
-  // Funções de clima
+  // Clima
   getWeather: (city) => ipcRenderer.invoke("get-weather", city),
   
-  // Funções de janelas
+  // Configurações
+  getSettings: () => ipcRenderer.invoke("get-settings"),
+  saveSettings: (settings) => ipcRenderer.send("save-settings", settings),
+  
+  // Janelas
   openConfig: () => ipcRenderer.send("open-config"),
   openAbout: () => ipcRenderer.send("open-about"),
   
-  // Funções de configurações
-  saveSettings: (settings) => ipcRenderer.send("save-settings", settings),
-  getSettings: () => ipcRenderer.invoke("get-settings"),
-  onSettingsUpdated: (cb) => {
-    ipcRenderer.removeAllListeners('settings-update');
-    ipcRenderer.on('settings-update', (event, settings) => cb(settings));
-  },
-  
-  // Funções de utilidade
-  onFocusSearch: (cb) => {
-    ipcRenderer.removeAllListeners('focus-search');
-    ipcRenderer.on('focus-search', () => cb());
-  },
+  // Energia
   togglePowerSave: (enable) => ipcRenderer.invoke('toggle-power-save', enable),
   
-  // Notificações
-  showNotification: (title, body, duration = 5000) => {
-    if ('Notification' in window) {
-      if (Notification.permission === 'granted') {
-        const notification = new Notification(title, { 
-          body, 
-          icon: '../assets/icons/icon.png'
-        });
-        
-        if (duration > 0) {
-          setTimeout(() => {
-            notification.close();
-          }, duration);
-        }
-        
-        return notification;
-      } else if (Notification.permission !== 'denied') {
-        Notification.requestPermission().then(permission => {
-          if (permission === 'granted') {
-            const notification = new Notification(title, { 
-              body, 
-              icon: '../assets/icons/icon.png'
-            });
-            
-            if (duration > 0) {
-              setTimeout(() => {
-                notification.close();
-              }, duration);
-            }
-          }
-        });
-      }
-    }
+  // Eventos
+  onSettingsUpdated: (callback) => {
+    ipcRenderer.on('settings-update', (_, settings) => callback(settings));
   },
   
-  // Ouvir notificações do main process
-  onNotification: (cb) => {
-    ipcRenderer.removeAllListeners('show-notification');
-    ipcRenderer.on('show-notification', (event, message) => {
-      cb(message);
-    });
+  onFocusSearch: (callback) => {
+    ipcRenderer.on('focus-search', () => callback());
+  },
+  
+  // Notificações do sistema
+  showNotification: (title, body) => {
+    if (Notification.permission === 'granted') {
+      new Notification(title, { body });
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission();
+    }
   }
 });
 
-// Menu de contexto simplificado
-document.addEventListener('DOMContentLoaded', () => {
-  document.addEventListener('contextmenu', (e) => {
-    if (e.target.matches('input[type="text"], textarea')) {
-      e.preventDefault();
-    }
-  });
+// Remove menu de contexto padrão em campos de texto
+document.addEventListener('contextmenu', (e) => {
+  if (e.target.matches('input, textarea')) {
+    e.preventDefault();
+  }
 });
